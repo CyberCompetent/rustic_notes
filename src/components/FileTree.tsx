@@ -38,12 +38,16 @@ const FileTree: React.FC = () => {
         {
           name: "School Workspace",
           type: "workspace",
-          children: [], // Start with no children
+          children: [
+            { name: "Example Note Page", type: "note", children: [] },
+          ],
         },
         {
           name: "Friends Workspace",
           type: "workspace",
-          children: [], // Start with no children
+          children: [
+            { name: "Example Note Page", type: "note", children: [] },
+          ],
         },
       ];
       setFileTreeData(initialFileTreeData);

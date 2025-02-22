@@ -13,6 +13,13 @@ const SettingsButton: React.FC = () => {
   const [activeOption, setActiveOption] = useState<string | null>(null); // Track active option
   const [username, setUsername] = useState(''); // State for username input
   const [email, setEmail] = useState(''); // State for email input
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+
+  const { workspaces, addWorkspace, deleteWorkspace } = useWorkspaces(); // Get workspaces and functions from context
+
+  // Use the context to access workspaces and functions
+  const [isAddWorkspaceModalOpen, setIsAddWorkspaceModalOpen] = useState(false); // State for the Add Workspace modal
+  const [newWorkspaceName, setNewWorkspaceName] = useState(''); // State for new workspace name input
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -24,20 +31,29 @@ const SettingsButton: React.FC = () => {
     setActiveOption(null); // Reset active option on close
   };
 
-  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
   
-  // Use the context to access workspaces and functions
-  const { workspaces, addWorkspace, deleteWorkspace } = useWorkspaces(); // Get workspaces and functions from context
 
-  const [isAddWorkspaceModalOpen, setIsAddWorkspaceModalOpen] = useState(false); // State for the Add Workspace modal
-  const [newWorkspaceName, setNewWorkspaceName] = useState(''); // State for new workspace name input
   
 
   const renderWorkspaces = () => {
     return workspaces.map(workspace => (
       <div key={workspace.name} className="flex justify-between items-center">
         <span>{workspace.name}</span>
-        <button onClick={() => deleteWorkspace(workspace.name)} className="text-red-500">Delete</button>
+        <div className="flex items-center">
+          <button 
+            onClick={() => { /* Logic for managing members will go here */ }} 
+            className="text-green-500 hover:underline mx-2"
+          >
+            Manage Members
+          </button>
+          <button 
+            onClick={() => { /* Logic for renaming will go here */ }} 
+            className="text-yellow-500 hover:underline mx-2"
+          >
+            Rename
+          </button>
+          <button onClick={() => deleteWorkspace(workspace.name)} className="text-red-500">Delete</button>
+        </div>
       </div>
     ));
   };
