@@ -1,10 +1,10 @@
 // IMPORT/USE SECTION
 import React, { useState } from 'react';
 
-//DECLARING PROPS
+// DECLARING PROPS
 interface SmallButtonProps {
   id: string;
-  buttons?: "plus" | "option" | "plus option" | "option plus"; // Control which icons to render
+  buttons?: "plus" | "option" | "arrow" | "plus option" | "option plus"; // Control which icons to render
   svg: string; // Base svg prop for non-hover state
   hoverSvg?: string; // Optional svg for hover state
   children: React.ReactNode;
@@ -14,29 +14,26 @@ interface SmallButtonProps {
   hover?: boolean; // Optional hover prop to control hover effect
 }
 
-//GENERAL LOGIC SECTION
+// GENERAL LOGIC SECTION
 const SmallButton: React.FC<SmallButtonProps> = ({
-  id, // Passing props such as id into SmallButton
+  id,
   buttons,
   svg,
   hoverSvg,
   children,
   onClick,
-  isActive = false, // Controlled by TopBar
+  isActive = false,
   className = '',
-  hover = true, // Default to true
+  hover = true,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Handle click and toggle the isActive state (only internally if onClick exists)
   const handleClick = () => {
-    // Optionally, you can call the passed-in onClick handler (if provided)
     if (onClick) {
-      onClick(); // Invoke the passed parent handler if available
+      onClick();
     }
   };
 
-  // Base and hover classes
   const baseClass = isActive ? 'bg-gray-900' : 'bg-gray-700';
   const hoverClass = hover ? (isActive ? 'hover:bg-black' : 'hover:bg-gray-800') : '';
 
@@ -45,10 +42,10 @@ const SmallButton: React.FC<SmallButtonProps> = ({
     if (buttons) {
       const icons = buttons.split(" ");
       return (
-        <>
+        <div className="ml-auto flex items-center">
           {icons.includes("plus") && (
             <span
-              className="material-icons rounded hover:bg-gray-700 mx-2"
+              className="material-icons rounded hover:bg-gray-700 mx-1"
               onClick={(e) => {
                 e.stopPropagation();
                 console.log("Add clicked for:", id);
@@ -59,7 +56,7 @@ const SmallButton: React.FC<SmallButtonProps> = ({
           )}
           {icons.includes("option") && (
             <span
-              className="material-icons rounded hover:bg-gray-700"
+              className="material-icons rounded hover:bg-gray-700 mx-1"
               onClick={(e) => {
                 e.stopPropagation();
                 console.log("Menu clicked for:", id);
@@ -68,7 +65,18 @@ const SmallButton: React.FC<SmallButtonProps> = ({
               more_vert
             </span>
           )}
-        </>
+          {icons.includes("arrow") && (
+            <span
+              className="material-icons rounded hover:bg-gray-700 mx-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log("Arrow clicked for:", id);
+              }}
+            >
+              keyboard_arrow_down
+            </span>
+          )}
+        </div>
       );
     }
     return null;
@@ -77,15 +85,16 @@ const SmallButton: React.FC<SmallButtonProps> = ({
   return (
     <button
       id={id}
-      className={`text-white py-2 px-2 rounded-lg flex items-center gap-2 ${baseClass} ${hoverClass} ${className}`}
-      onClick={handleClick} // Call the handleClick function on click
-      onMouseEnter={() => setIsHovered(true)} // Set hover state
-      onMouseLeave={() => setIsHovered(false)} // Reset hover state
+      className={`text-white py-2 px-2 rounded-lg flex items-center ${baseClass} ${hoverClass} ${className}`}
+      onClick={handleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Render SVG based on hover state */}
-      <span className="material-icons text-xl">{isHovered && hoverSvg ? hoverSvg : svg}</span>
+      <span className="material-icons text-xl mr-2">{isHovered && hoverSvg ? hoverSvg : svg}</span>
       {children}
-      {renderIcons()} {/* Render additional icons after children */}
+      {/* Render additional icons to the far right */}
+      {renderIcons()} {/* Render additional icons */}
     </button>
   );
 };

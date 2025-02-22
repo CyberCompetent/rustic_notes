@@ -1,4 +1,3 @@
-// SettingsItem.tsx
 import React from 'react';
 import SmallButton from '../templates/SmallButton';
 
@@ -6,18 +5,20 @@ interface SettingsItemProps {
   id: string;
   svg: string;
   onClick: () => void;
+  isActive: boolean; // New prop for active state
   children: React.ReactNode;
+  className?: string; // Optional className for custom styling
 }
 
-const SettingsItem: React.FC<SettingsItemProps> = ({ id, svg, onClick, children }) => {
+const SettingsItem: React.FC<SettingsItemProps> = ({ id, svg, onClick, isActive, children, className }) => {
   return (
     <SmallButton
-      svg={svg}
       id={id}
+      svg={svg}
       onClick={onClick}
-      isActive={false} // You can modify this as needed based on your requirements
-      hover={true} // Always set to true
-      className="w-full text-left" // Ensures full width for list items
+      isActive={isActive} // Pass the active state to SmallButton
+      hover={true}
+      className={`w-full text-left ${className} ${isActive ? 'bg-gray-800' : ''}`} // Apply active styling
     >
       {children}
     </SmallButton>

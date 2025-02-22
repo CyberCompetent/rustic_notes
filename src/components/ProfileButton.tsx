@@ -12,10 +12,10 @@ const ProfileButton: React.FC = () => {
   return (
     <SmallButton
       id="select-mode-button"
-      svg="account_circle"
+      svg="brightness_1"
       onClick={handleClick}
       isActive={isActive}
-      buttons="plus option"
+      buttons="arrow"
       hover={true}
     >
       Username
