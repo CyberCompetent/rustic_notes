@@ -35,7 +35,7 @@ const fileTreeData: File[] = [
 const FileTree: React.FC = () => {
   // Recursively render the file tree
   const renderFileTree = (files: File[]) => (
-    <ul className="list-none">
+    <ul className="flex flex-col list-none gap-1">
       {files.map((file, index) => (
         <FileTreeNode key={index} file={file} />
       ))}

@@ -1,24 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SmallButton from './templates/SmallButton';
 
-interface ButtonProps {
-  isActive: boolean;
-  onClick: () => void;
-}
+const ProfileButton: React.FC = () => {
+  const [isActive, setIsActive] = useState(false);
 
-const SelectModeButton: React.FC<ButtonProps> = ({ isActive, onClick }) => {
+  const handleClick = () => {
+    setIsActive(!isActive);
+    console.log("Profile button clicked:", isActive);
+  };
+
   return (
     <SmallButton
       id="select-mode-button"
       svg="account_circle"
-      onClick={onClick}
-      isActive={isActive} // Pass isActive to SmallButton
+      onClick={handleClick}
+      isActive={isActive}
       buttons="plus option"
-      hover={false}
+      hover={true}
     >
       Username
     </SmallButton>
   );
 };
 
-export default SelectModeButton;
+export default ProfileButton;
