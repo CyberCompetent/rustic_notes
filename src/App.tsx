@@ -3,11 +3,14 @@
 //import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
 
+import { WorkspaceProvider } from './components/WorkspaceContext'; // Adjust the import path as needed
+
 import TopBar from './components/TopBar';
 import SideBar from './components/SideBar';
 
 function App() {
   return (
+<WorkspaceProvider>
 <div className="flex h-dvh font-sans">
   <SideBar />
   <div className="flex flex-col flex-grow">
@@ -20,6 +23,7 @@ function App() {
     </div>
   </div>
 </div>
+</WorkspaceProvider>
 
   );
 }
