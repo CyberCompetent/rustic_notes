@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import SmallButton from './templates/SmallButton';
 import SettingsItem from './SettingsMenu/SettingsItem';
 import { useWorkspaces } from './WorkspaceContext'; // Import the hook
@@ -16,8 +16,8 @@ const SettingsButton: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
 
   const { workspaces, addWorkspace, deleteWorkspace } = useWorkspaces(); // Get workspaces and functions from context
+  const [checkedWorkspaces, setCheckedWorkspaces] = useState<Record<string, boolean>>({});
 
-  // Use the context to access workspaces and functions
   const [isAddWorkspaceModalOpen, setIsAddWorkspaceModalOpen] = useState(false); // State for the Add Workspace modal
   const [newWorkspaceName, setNewWorkspaceName] = useState(''); // State for new workspace name input
 
@@ -31,37 +31,84 @@ const SettingsButton: React.FC = () => {
     setActiveOption(null); // Reset active option on close
   };
 
-  
+  const handleCheckboxChange = (workspaceName: string) => {
+    setCheckedWorkspaces((prev) => ({
+      ...prev,
+      [workspaceName]: !prev[workspaceName], // Toggle the checked state
+    }));
+  };
 
+  const handleDeleteWorkspaces = () => {
+    const workspacesToDelete = Object.keys(checkedWorkspaces).filter(
+      (workspaceName) => checkedWorkspaces[workspaceName]
+    );
+  
+    // Log the workspaces to delete
+    console.log("Workspaces to delete:", workspacesToDelete);
+  
+    // Delete each workspace that is checked
+    workspacesToDelete.forEach((workspaceName) => {
+      deleteWorkspace(workspaceName); // Call the delete function for each checked workspace
+    });
+  
+    // Reset the checked workspaces state after deletion
+    setCheckedWorkspaces((prev) => {
+      const updatedCheckedWorkspaces = { ...prev };
+      workspacesToDelete.forEach((workspaceName) => {
+        delete updatedCheckedWorkspaces[workspaceName]; // Remove deleted workspaces from checked state
+      });
+      return updatedCheckedWorkspaces;
+    });
+  
+    // Log the updated checked workspaces
+    console.log("Updated checked workspaces:", checkedWorkspaces);
+  };
+  
+  
   
 
   const renderWorkspaces = () => {
     return workspaces.map(workspace => (
-      <div key={workspace.name} className="flex justify-between items-center">
-        <span>{workspace.name}</span>
-        <div className="flex items-center">
-          <button 
-            onClick={() => { /* Logic for managing members will go here */ }} 
-            className="text-green-500 hover:underline mx-2"
-          >
-            Manage Members
-          </button>
-          <button 
-            onClick={() => { /* Logic for renaming will go here */ }} 
-            className="text-yellow-500 hover:underline mx-2"
-          >
-            Rename
-          </button>
-          <button onClick={() => deleteWorkspace(workspace.name)} className="text-red-500">Delete</button>
-        </div>
-      </div>
+      <tr key={workspace.name}>
+        <th>
+          <label>
+          <input
+            type="checkbox"
+            className="checkbox"
+            checked={!!checkedWorkspaces[workspace.name]} // Check if this workspace is checked
+            onChange={() => handleCheckboxChange(workspace.name)} // Update state on change
+          />
+          </label>
+        </th>
+        <td>
+          <div className="flex items-center gap-3">
+            <div className="avatar">
+            <span
+              className="material-icons rounded hover:bg-gray-700 mx-1"
+            >
+              workspaces
+            </span>
+            </div>
+            <div>
+              <div className="font-bold">{workspace.name}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          example_acc, example_acc, example_acc
+          <br />
+        </td>
+        <td>example_acc</td>
+        <th>
+          <button className="btn btn-ghost btn-xs">details</button>
+        </th>
+      </tr>
     ));
   };
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode); // Toggle dark mode state
   };
-  
 
   // Sections with associated icons and their settings options
   const sections = [
@@ -79,23 +126,17 @@ const SettingsButton: React.FC = () => {
     {
       name: 'Preferences',
       svg: 'tune', // Section SVG
-      options: [
-
-      ],
+      options: [],
     },
     {
       name: 'Workspaces',
       svg: 'workspaces', // Section SVG
-      options: [
-
-      ],
+      options: [],
     },
     {
       name: 'Keybinds',
       svg: 'keyboard', // Section SVG
-      options: [
-
-      ],
+      options: [],
     },
     {
       name: 'Theme',
@@ -161,26 +202,26 @@ const SettingsButton: React.FC = () => {
             <button className="mt-2 px-4 py-2 bg-red-600 rounded hover:bg-red-700">Delete Account</button>
           </div>
         );
-        case 'Deep Ice':
-        case 'Rustic Woods':
-        case 'Golden Sahara':
-          return (
-            <div className="mt-2 p-2 bg-gray-800 rounded">
-              <p className="text-white">Selected Theme: {option} {isDarkMode ? 'Dark Mode' : 'Light Mode'}</p>
-              <label className="flex items-center cursor-pointer">
-                <div className="relative">
-                  <input type="checkbox" className="hidden" checked={isDarkMode} onChange={toggleTheme} />
-                  <div className={`block w-14 h-8 rounded-full ${isDarkMode ? 'bg-green-500' : 'bg-gray-400'}`}></div>
-                  <div
-                    className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 ${
-                      isDarkMode ? 'transform translate-x-full' : ''
-                    }`}
-                  ></div>
-                </div>
-                <span className="ml-3 text-sm text-white">Toggle Dark/Light Mode</span>
-              </label>
-            </div>
-          );
+      case 'Deep Ice':
+      case 'Rustic Woods':
+      case 'Golden Sahara':
+        return (
+          <div className="mt-2 p-2 bg-gray-800 rounded">
+            <p className="text-white">Selected Theme: {option} {isDarkMode ? 'Dark Mode' : 'Light Mode'}</p>
+            <label className="flex items-center cursor-pointer">
+              <div className="relative">
+                <input type="checkbox" className="hidden" checked={isDarkMode} onChange={toggleTheme} />
+                <div className={`block w-14 h-8 rounded-full ${isDarkMode ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                <div
+                  className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 ${
+                    isDarkMode ? 'transform translate-x-full' : ''
+                  }`}
+                ></div>
+              </div>
+              <span className="ml-3 text-sm text-white">Toggle Dark/Light Mode</span>
+            </label>
+          </div>
+        );
       default:
         return null;
     }
@@ -198,7 +239,7 @@ const SettingsButton: React.FC = () => {
       >
         Settings
       </SmallButton>
-  
+
       {/* Modal for Settings */}
       {isActive && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-60">
@@ -224,10 +265,10 @@ const SettingsButton: React.FC = () => {
                 ))}
               </ul>
             </div>
-  
+
             {/* Right Section for Options */}
             <div className="w-2/3 p-4">
-              <h3 className="text-xl font-semibold mb-2">{activeSection} Settings</h3>
+              <h3 className="text-xl font-semibold h-[10%]">{activeSection} Settings</h3>
               <ul className="space-y-0">
                 {sections.find((s) => s.name === activeSection)?.options.map(({ name, svg }) => (
                   <div key={name}>
@@ -247,24 +288,53 @@ const SettingsButton: React.FC = () => {
                   </div>
                 ))}
               </ul>
-  
-                {/* Render workspaces only when the Workspaces section is active */}
-                {activeSection === 'Workspaces' && (
-                  <div className="mt-4">
+
+              {/* Render workspaces only when the Workspaces section is active */}
+              {activeSection === 'Workspaces' && (
+                <div className="h-[90%]">
+                  <div className="flex flex-row h-[15%] justify-between">
                     <h4 className="text-lg font-semibold">Manage Workspaces</h4>
-                    <button 
-                      onClick={() => setIsAddWorkspaceModalOpen(true)} 
-                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    >
-                      Add Workspace
-                    </button>
+                    <div className='flex gap-6'>
+                      <button
+                        onClick={() => setIsAddWorkspaceModalOpen(true)}
+                        className=" max-h-[43px] bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                      >
+                        Add Workspace
+                      </button>
+                      <button
+                        onClick={handleDeleteWorkspaces}
+                        className=" max-h-[43px] bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  <div className="h-[90%]">
+                    <div className="overflow-y-auto h-full">
+                      <table className="table max-h-20 w-full overflow-hidden">
+                        {/* head */}
+                        <thead>
+                          <tr>
+                            <th>
+                              <label>
+                                <input type="checkbox" className="checkbox" />
+                              </label>
+                            </th>
+                            <th>Name</th>
+                            <th>Members</th>
+                            <th>Owners</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody className='overflow-y-scroll h-full'>{renderWorkspaces()}</tbody>
+                      </table>
+                    </div>
+                  </div>
 
-                    {renderWorkspaces()} {/* Only render workspaces when in the Workspaces section */}
-
-                    {/* Add Workspace Modal */}
-                    {isAddWorkspaceModalOpen && (
-                    <Modal 
-                      onClose={() => setIsAddWorkspaceModalOpen(false)} 
+                  {/* Add Workspace Modal */}
+                  {isAddWorkspaceModalOpen && (
+                    <Modal
+                      onClose={() => setIsAddWorkspaceModalOpen(false)}
                       onAdd={(workspaceName) => {
                         const newWorkspace: Workspace = {
                           name: workspaceName,
@@ -278,15 +348,12 @@ const SettingsButton: React.FC = () => {
                       setWorkspaceName={setNewWorkspaceName} // Pass the setter function
                     />
                   )}
-
-
-                  </div>
-                )}
-
+                </div>
+              )}
             </div>
-  
+
             {/* Close Button */}
-            <button 
+            <button
               className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
               onClick={handleClose}
             >

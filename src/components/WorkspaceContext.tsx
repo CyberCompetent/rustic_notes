@@ -37,9 +37,11 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }
 
 
   const deleteWorkspace = (name: string) => {
-    const newWorkspaces = workspaces.filter(ws => ws.name !== name);
-    setWorkspaces(newWorkspaces);
-    localStorage.setItem('workspaces', JSON.stringify(newWorkspaces));
+    setWorkspaces((prevWorkspaces) => {
+      const newWorkspaces = prevWorkspaces.filter(ws => ws.name !== name);
+      localStorage.setItem('workspaces', JSON.stringify(newWorkspaces));
+      return newWorkspaces;
+    });
   };
 
   return (

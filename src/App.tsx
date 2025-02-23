@@ -7,6 +7,8 @@ import { WorkspaceProvider } from './components/WorkspaceContext'; // Adjust the
 
 import TopBar from './components/TopBar';
 import SideBar from './components/SideBar';
+import TextEditor from './components/TextEditor';
+
 
 function App() {
   return (
@@ -15,11 +17,9 @@ function App() {
   <SideBar />
   <div className="flex flex-col flex-grow">
     <TopBar />
-    <div className="flex-grow h-full"> {/* Explicit height for debugging */}
-      <textarea
-        className="w-full h-full p-4 text-base bg-gray-50 text-gray-800 border-none outline-none box-border"
-        placeholder="Start writing your notes here..."
-      ></textarea>
+    <div className="flex-grow h-full bg-gray-200"> {/* Explicit height for debugging */}
+      <TextEditor
+      ></TextEditor>
     </div>
   </div>
 </div>
