@@ -13,6 +13,7 @@ const SelectModeButton: React.FC<ButtonProps> = ({ isActive, onClick }) => {
       svg="select_all"
       onClick={onClick}
       isActive={isActive} // Pass isActive to SmallButton
+      className='btn join-item'
     >
       Select Mode
     </SmallButton>

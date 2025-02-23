@@ -5,12 +5,17 @@ import SelectModeButton from './TopBar/SelectModeButton';
 import TextModeButton from './TopBar/TextModeButton';
 import DrawModeButton from './TopBar/DrawModeButton';
 import Logo from './Logo';
+import SmallButton from './templates/SmallButton';
 
 const TopBar: React.FC = () => {
   const [activeMode, setActiveMode] = useState<'select' | 'text' | 'draw' | null>(null);
+
+  const [isRubberActive, setIsRubberActive] = useState(false);
   const [brushSize, setBrushSize] = useState<string>('10');
   const [opacity, setOpacity] = useState<string>('100');
   const [brushColor, setBrushColor] = useState('#000000');
+
+  const [activeTextMode, setActiveTextMode] = useState<'pageText' | 'textBox'>('pageText');
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10); // Parse the value to a number
@@ -28,6 +33,16 @@ const TopBar: React.FC = () => {
 
   const handleModeClick = (mode: 'select' | 'text' | 'draw') => {
     setActiveMode(activeMode === mode ? null : mode);
+    setIsRubberActive(false); // Disable rubber when switching modes
+  };
+
+
+  const handleRubberClick = () => {
+    setIsRubberActive((prev) => !prev);
+  };
+
+  const handleTextModeClick = (mode: 'pageText' | 'textBox') => {
+    setActiveTextMode(activeTextMode === mode ? activeTextMode : mode); // Toggle between modes
   };
 
   const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>, min: number, max: number) => {
@@ -47,15 +62,20 @@ const TopBar: React.FC = () => {
   return (
     <div className="h-16 bg-gray-700 text-white flex items-center px-5 gap-4">
       <Logo mode="bright" />
-      <div className="flex gap-4">
+      <div className="join">
         <SelectModeButton isActive={activeMode === 'select'} onClick={() => handleModeClick('select')} />
         <TextModeButton isActive={activeMode === 'text'} onClick={() => handleModeClick('text')} />
         <DrawModeButton isActive={activeMode === 'draw'} onClick={() => handleModeClick('draw')} />
       </div>
-
       {/* Mode Settings */}
       <div id="mode-settings" className="flex-grow flex items-center gap-4">
-        {activeMode === 'draw' && (
+        {activeMode === 'text' && (
+        <div className="join">
+          <SmallButton isActive={activeTextMode === 'pageText'} onClick={() => handleTextModeClick('pageText')} className="join-item btn" id="page-text" svg='article'>Page text</SmallButton>
+          <SmallButton isActive={activeTextMode === 'textBox'} onClick={() => handleTextModeClick('textBox')} className="join-item btn" id="text box" svg='check_box_outline_blank'>text box</SmallButton>
+        </div>
+        )}
+                {activeMode === 'draw' && (
           <div className="flex items-center gap-4">
             {/* Brush Size */}
             <label className="text-sm">Brush Size:</label>
@@ -109,11 +129,20 @@ const TopBar: React.FC = () => {
               type="color"
               value={brushColor}
               onChange={(e) => setBrushColor(e.target.value)}
-              className="w-10 h-6"
+              className="w-8 h-8 rounded border border-gray-300 cursor-pointer shadow-md"
+              style={{ backgroundColor: brushColor }} // Set background dynamically
             />
 
             {/* Rubber */}
-            <button className="bg-red-500 text-white px-3 py-1 rounded">Rubber</button>
+            <SmallButton
+              id="rubber"
+              svg="edit_off"
+              className={`btn`}
+              isActive={isRubberActive}
+              onClick={handleRubberClick}
+            >
+              Rubber
+            </SmallButton>
           </div>
         )}
       </div>
