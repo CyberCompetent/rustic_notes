@@ -17,7 +17,7 @@ function App() {
   <SideBar />
   <div className="flex flex-col flex-grow">
     <TopBar />
-    <div className="flex-grow h-full bg-gray-200"> {/* Explicit height for debugging */}
+    <div className=" pt-2 flex-grow h-full bg-gray-200"> {/* Explicit height for debugging */}
       <TextEditor
       ></TextEditor>
     </div>
