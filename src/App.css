@@ -1,5 +1,6 @@
 @import 'material-icons/iconfont/material-icons.css';
 @import 'prosemirror-view/style/prosemirror.css';
+@import "tailwindcss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

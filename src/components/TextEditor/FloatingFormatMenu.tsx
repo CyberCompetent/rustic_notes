@@ -85,36 +85,78 @@ export default function FloatingFormatMenu({ editorView }: FloatingFormatMenuPro
   style={{ ...floatingStyles, zIndex: 1000 }} // Ensure the menu is on top
   className="floating-format-menu absolute bg-white border rounded-lg shadow-lg p-2 flex space-x-2"
 >
-      <button
-        className="p-1 text-gray-600 hover:text-black"
-        onClick={(e) => {
-          e.preventDefault(); // Prevent default button behavior
-          e.stopPropagation(); // Stop event propagation
-          applyMark("strong");
-        }}
-      >
-        <b>B</b>
-      </button>
-      <button
-        className="p-1 text-gray-600 hover:text-black"
-        onClick={(e) => {
-          e.preventDefault(); // Prevent default button behavior
-          e.stopPropagation(); // Stop event propagation
-          applyMark("em");
-        }}
-      >
-        <i>I</i>
-      </button>
-      <button
-        className="p-1 text-gray-600 hover:text-black"
-        onClick={(e) => {
-          e.preventDefault(); // Prevent default button behavior
-          e.stopPropagation(); // Stop event propagation
-          applyMark("underline");
-        }}
-      >
-        <u>U</u>
-      </button>
-    </div>
+
+  <button
+    className="p-1 text-gray-600 hover:text-black material-icons"
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      applyMark("strong");
+    }}
+  >
+  format_bold
+  </button>
+  <button
+    className="p-1 text-gray-600 hover:text-black material-icons"
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      applyMark("em");
+    }}
+  >
+    format_italic
+  </button>
+  <button
+    className="p-1 text-gray-600 hover:text-black material-icons"
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      applyMark("underline");
+    }}
+  >
+    format_underlined
+  </button>
+  <button
+    className="p-1 text-gray-600 hover:text-black material-icons"
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      applyMark("strike");
+    }}
+  >
+    strikethrough_s
+  </button>
+  <button
+    className="p-1 text-gray-600 hover:text-black material-icons"
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      applyMark("code");
+    }}
+  >
+  code
+  </button>
+  <button
+    className="p-1 text-gray-600 hover:text-black material-icons"
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      applyMark("math");
+    }}
+  >
+    functions
+  </button>
+  <button
+    className="p-1 text-gray-600 hover:text-black material-icons"
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = prompt("Enter URL:");
+      if (url) applyMark("link", url);
+    }}
+  >
+    add_link
+  </button>
+</div>
   );
 }
