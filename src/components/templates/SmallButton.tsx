@@ -85,7 +85,7 @@ const SmallButton: React.FC<SmallButtonProps> = ({
   return (
     <button
       id={id}
-      className={`text-white py-2 px-2 rounded-lg flex items-center ${baseClass} ${hoverClass} ${className}`}
+      className={`text-white py-2 px-2 rounded-lg flex items-center cursor-pointer ${baseClass} ${hoverClass} ${className}`}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

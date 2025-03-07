@@ -13,7 +13,7 @@ const TextModeButton: React.FC<ButtonProps> = ({ isActive, onClick }) => {
       svg="text_fields"
       onClick={onClick}
       isActive={isActive} // Pass isActive to SmallButton
-      className='btn join-item'
+      className='btn join-item rounded-none'
     >
       Text Mode
     </SmallButton>

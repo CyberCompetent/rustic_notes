@@ -13,7 +13,7 @@ const DrawModeButton: React.FC<ButtonProps> = ({ isActive, onClick }) => {
       svg="draw"
       onClick={onClick}
       isActive={isActive} // Pass isActive to SmallButton
-      className='btn join-item '
+      className='btn join-item rounded-none'
     >
       Draw Mode
     </SmallButton>

@@ -71,8 +71,8 @@ const TopBar: React.FC = () => {
       <div id="mode-settings" className="flex-grow flex items-center gap-4">
         {activeMode === 'text' && (
         <div className="join">
-          <SmallButton isActive={activeTextMode === 'pageText'} onClick={() => handleTextModeClick('pageText')} className="join-item btn" id="page-text" svg='article'>Page text</SmallButton>
-          <SmallButton isActive={activeTextMode === 'textBox'} onClick={() => handleTextModeClick('textBox')} className="join-item btn" id="text box" svg='check_box_outline_blank'>text box</SmallButton>
+          <SmallButton isActive={activeTextMode === 'pageText'} onClick={() => handleTextModeClick('pageText')} className="join-item btn rounded-none" id="page-text" svg='article'>Page text</SmallButton>
+          <SmallButton isActive={activeTextMode === 'textBox'} onClick={() => handleTextModeClick('textBox')} className="join-item btn rounded-none" id="text box" svg='check_box_outline_blank'>text box</SmallButton>
         </div>
         )}
                 {activeMode === 'draw' && (

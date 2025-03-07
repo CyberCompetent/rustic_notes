@@ -1,25 +1,13 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
 @import 'material-icons/iconfont/material-icons.css';
 @import 'prosemirror-view/style/prosemirror.css';
-@import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .bg-black {
+    background-color: transparent; /* Or any other colour you'd like */
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .hidden {
