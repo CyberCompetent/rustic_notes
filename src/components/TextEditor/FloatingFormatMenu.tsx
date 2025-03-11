@@ -3,6 +3,7 @@ import { useFloating, offset, flip, shift } from "@floating-ui/react";
 import { EditorView } from "prosemirror-view";
 import { toggleMark } from "prosemirror-commands";
 import { schema } from "prosemirror-schema-basic";
+import ToggleComponent from "@/components/templates/toggle";
 
 interface FloatingFormatMenuProps {
   editorView: EditorView; // Ensure editorView is not null
@@ -85,78 +86,42 @@ export default function FloatingFormatMenu({ editorView }: FloatingFormatMenuPro
   style={{ ...floatingStyles, zIndex: 1000 }} // Ensure the menu is on top
   className="floating-format-menu absolute bg-white border rounded-lg shadow-lg p-2 flex space-x-2"
 >
+<div className="dropdown">
+  <div tabIndex={0} role="button" className="btn m-1">Click</div>
+  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+    <li><a>Item 1</a></li>
+    <li><a>Item 2</a></li>
+  </ul>
+</div>
 
-  <button
-    className="p-1 text-gray-600 hover:text-black material-icons"
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      applyMark("strong");
-    }}
-  >
-  format_bold
-  </button>
-  <button
-    className="p-1 text-gray-600 hover:text-black material-icons"
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      applyMark("em");
-    }}
-  >
-    format_italic
-  </button>
-  <button
-    className="p-1 text-gray-600 hover:text-black material-icons"
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      applyMark("underline");
-    }}
-  >
-    format_underlined
-  </button>
-  <button
-    className="p-1 text-gray-600 hover:text-black material-icons"
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      applyMark("strike");
-    }}
-  >
-    strikethrough_s
-  </button>
-  <button
-    className="p-1 text-gray-600 hover:text-black material-icons"
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      applyMark("code");
-    }}
-  >
-  code
-  </button>
-  <button
-    className="p-1 text-gray-600 hover:text-black material-icons"
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      applyMark("math");
-    }}
-  >
-    functions
-  </button>
-  <button
-    className="p-1 text-gray-600 hover:text-black material-icons"
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const url = prompt("Enter URL:");
-      if (url) applyMark("link", url);
-    }}
-  >
-    add_link
-  </button>
+        <ToggleComponent
+          text="format_bold"
+          applyMark={(mark) => applyMark("strong")}
+        />
+        <ToggleComponent
+          text="format_italic"
+          applyMark={(mark) => applyMark("em")}
+        />
+        <ToggleComponent
+          text="format_underlined"
+          applyMark={(mark) => applyMark("underline")}
+        />
+        <ToggleComponent
+          text="strikethrough_s"
+          applyMark={(mark) => applyMark("strike")}
+        />
+        <ToggleComponent
+          text="code"
+          applyMark={(mark) => applyMark("code")}
+        />
+        <ToggleComponent
+          text="functions"
+          applyMark={(mark) => applyMark("math")}
+        />
+        <ToggleComponent
+          text="add_link"
+          applyMark={(mark) => applyMark("link")}
+        />
 </div>
   );
 }
