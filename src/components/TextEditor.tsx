@@ -8,6 +8,8 @@ import { baseKeymap } from "prosemirror-commands";
 import { history, undo, redo } from "prosemirror-history";
 import { Selection } from "prosemirror-state";
 import FloatingFormatMenu from "./TextEditor/FloatingFormatMenu"; // Import the FloatingFormatMenu
+import Title from "./TextEditor/Title";
+
 
 const ProseMirrorEditor: React.FC = () => {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -59,8 +61,11 @@ const ProseMirrorEditor: React.FC = () => {
           // Prevent cursor movement when clicking inside the editor
           return;
         }
-        if ((event.target as HTMLElement).closest(".floating-format-menu")) {
-          // Prevent cursor movement when clicking inside the menu
+        if (
+          (event.target as HTMLElement).closest(".floating-format-menu") ||
+          (event.target as HTMLElement).closest(".title-input") // Add this condition
+        ) {
+          // Do nothing if the click is inside the floating format menu or the title
           return;
         }
 
@@ -100,7 +105,7 @@ const ProseMirrorEditor: React.FC = () => {
           }
 
           // Set resolved position to the nearest line position, plus one to adjust upward
-          let resolvedPos = linePositions[nearestLineIndex] - 2; // Move one line higher
+          let resolvedPos = linePositions[nearestLineIndex] - 9; // Move one line higher
 
           // Create a new selection based on the resolved position
           const newSelection = Selection.near(viewRef.current.state.doc.resolve(resolvedPos));
@@ -125,7 +130,9 @@ const ProseMirrorEditor: React.FC = () => {
   }, []);
 
   return (
-    <div ref={editorContainerRef} className="flex h-full flex-grow justify-center">
+    <div ref={editorContainerRef} className="flex flex-col justify-start items-center h-full flex-grow">
+      <Title />
+
       {editorView && <FloatingFormatMenu editorView={editorView} />} {/* Only render if editorView exists */}
       <div
         ref={editorRef}

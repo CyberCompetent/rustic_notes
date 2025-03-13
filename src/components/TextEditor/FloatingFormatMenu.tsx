@@ -14,7 +14,7 @@ export default function FloatingFormatMenu({ editorView }: FloatingFormatMenuPro
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const { refs, floatingStyles, update } = useFloating({
-    placement: "top",
+    placement: "right",
     middleware: [offset(-35), flip(), shift()],
   });
 
@@ -86,7 +86,6 @@ export default function FloatingFormatMenu({ editorView }: FloatingFormatMenuPro
   style={{ ...floatingStyles, zIndex: 1000 }} // Ensure the menu is on top
   className="floating-format-menu absolute bg-white border rounded-lg shadow-lg p-2 flex space-x-2 justify-center content-center"
 >
-
 <div className="dropdown dropdown-start">
   <div tabIndex={0} role="button" className='btn bg-transparent border-none shadow-none text-black h-9'>Text<span className="material-icons">keyboard_arrow_down</span></div>
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
@@ -101,7 +100,10 @@ export default function FloatingFormatMenu({ editorView }: FloatingFormatMenuPro
     <li><a>Block code</a></li>
     <li><a>Block equation</a></li>
     <li><a>Call out</a></li>
-    <li><a>Table</a></li>
+
+
+
+
   </ul>
 </div>
 

@@ -71,7 +71,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       </SmallButton>
 
       {isActive && (
-        <div className="absolute left-0 mt-1 w-full bg-gray-800 text-white shadow-lg rounded-lg z-50">
+        <div className="absolute left-0  w-full bg-gray-800 text-white shadow-lg rounded-lg z-50">
           {options.map((option, index) => (
             <button
               key={index}
