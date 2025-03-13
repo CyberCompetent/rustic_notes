@@ -84,15 +84,27 @@ export default function FloatingFormatMenu({ editorView }: FloatingFormatMenuPro
     if (menuRef) menuRef.current = el;
   }}
   style={{ ...floatingStyles, zIndex: 1000 }} // Ensure the menu is on top
-  className="floating-format-menu absolute bg-white border rounded-lg shadow-lg p-2 flex space-x-2"
+  className="floating-format-menu absolute bg-white border rounded-lg shadow-lg p-2 flex space-x-2 justify-center content-center"
 >
-<div className="dropdown">
-  <div tabIndex={0} role="button" className="btn m-1">Click</div>
+
+<div className="dropdown dropdown-start">
+  <div tabIndex={0} role="button" className='btn bg-transparent border-none shadow-none text-black h-9'>Text<span className="material-icons">keyboard_arrow_down</span></div>
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
+    <li><a>Bullet list</a></li>
+    <li><a>Number list</a></li>
+    <li><a>To-do list</a></li>
+    <li><a>Toggle list</a></li>
+    <li><a>Heading 1</a></li>
+    <li><a>Heading 2</a></li>
+    <li><a>Heading 3</a></li>
+    <li><a>Quote</a></li>
+    <li><a>Block code</a></li>
+    <li><a>Block equation</a></li>
+    <li><a>Call out</a></li>
+    <li><a>Table</a></li>
   </ul>
 </div>
+
 
         <ToggleComponent
           text="format_bold"
