@@ -1,32 +1,17 @@
-//import { useState } from "react";
-//import reactLogo from "./assets/react.svg";
-//import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
-
-import { WorkspaceProvider } from './components/WorkspaceContext'; // Adjust the import path as needed
-
-import TopBar from './components/TopBar';
-import SideBar from './components/SideBar';
-import TextEditor from './components/TextEditor';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NoteEditor from './NoteEditor';
+import Login from './Login.tsx';
 
 function App() {
-  return (
-<WorkspaceProvider>
-<div className="flex h-dvh font-sans">
-  <SideBar />
-  <div className="flex flex-col flex-grow">
-    <TopBar />
-    <div className=" pt-2 flex-grow h-full bg-gray-200"> {/* Explicit height for debugging */}
-      <TextEditor
-      ></TextEditor>
-    </div>
-  </div>
-</div>
-</WorkspaceProvider>
-
-  );
+    return ( // Add return statement here
+        <Router>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/NoteEditor" element={<NoteEditor />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
-
