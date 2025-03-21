@@ -1,5 +1,6 @@
 // IMPORT/USE SECTION
 import React, { useState } from 'react';
+import { useHover } from "@/hooks/useHover";
 
 // DECLARING PROPS
 interface SmallButtonProps {
@@ -26,7 +27,7 @@ const SmallButton: React.FC<SmallButtonProps> = ({
   className = '',
   hover = true,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const { isHovered, handleMouseEnter, handleMouseLeave, hoverClass } = useHover(isActive, hover);
 
   const handleClick = () => {
     if (onClick) {
@@ -35,8 +36,7 @@ const SmallButton: React.FC<SmallButtonProps> = ({
   };
 
   const baseClass = isActive ? 'bg-gray-900' : 'bg-gray-700';
-  const hoverClass = hover ? (isActive ? 'hover:bg-black' : 'hover:bg-gray-800') : '';
-
+  
   // Render additional icons based on `buttons` prop
   const renderIcons = () => {
     if (buttons) {
@@ -87,8 +87,8 @@ const SmallButton: React.FC<SmallButtonProps> = ({
       id={id}
       className={`text-white py-2 px-2 rounded-lg flex items-center cursor-pointer ${baseClass} ${hoverClass} ${className}`}
       onClick={handleClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Render SVG based on hover state */}
       <span className="material-icons text-xl mr-2">{isHovered && hoverSvg ? hoverSvg : svg}</span>
