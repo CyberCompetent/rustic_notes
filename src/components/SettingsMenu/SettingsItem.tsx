@@ -17,7 +17,7 @@ const SettingsItem: React.FC<SettingsItemProps> = ({ id, svg, onClick, isActive,
       svg={svg}
       onClick={onClick}
       isActive={isActive} // Pass the active state to SmallButton
-      className={`w-full text-left ${className} ${isActive ? 'bg-gray-800' : ''}`} // Apply active styling
+      className={`w-full text-left ${className} `} // Apply active styling
     >
       {children}
     </SmallButton>

@@ -70,11 +70,11 @@ const Dropdown: React.FC<DropdownProps> = ({
       </Button>
 
       {isActive && (
-        <div className="absolute left-0 w-full bg-gray-800 text-white shadow-lg rounded-lg z-50">
+        <div className="absolute left-0 w-full bg-1-1 text-white shadow-lg rounded-lg z-50">
           {options.map((option, index) => (
             <button
               key={index}
-              className="block w-full px-4 py-2 text-left hover:bg-gray-600"
+              className="block w-full px-4 py-2 text-left hover:bg-1-2"
               onClick={() => handleSelect(option)}
             >
               {option}

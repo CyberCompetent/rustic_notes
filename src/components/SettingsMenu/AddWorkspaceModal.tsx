@@ -18,8 +18,8 @@ const AddWorkspaceModal: React.FC<AddWorkspaceModalProps> = ({ onClose, onAdd, w
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-60">
-      <div className="bg-gray-700 text-white rounded-lg shadow-lg p-4">
+    <div className="fixed inset-0 flex items-center justify-center z-60 bg-black">
+      <div className="bg-1 text-white rounded-lg shadow-lg p-4">
         <h2 className="text-lg font-semibold mb-2">Add New Workspace</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -30,7 +30,7 @@ const AddWorkspaceModal: React.FC<AddWorkspaceModalProps> = ({ onClose, onAdd, w
             className="p-2 rounded w-full bg-gray-800 mb-2"
             required
           />
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Workspace</button>
+          <button type="submit" className="bg-bu text-white px-4 py-2 rounded hover:bg-bu-1">Add Workspace</button>
         </form>
         <button className="mt-2 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" onClick={onClose}>
           Cancel

@@ -20,7 +20,7 @@ export default function Title({ onTitleChange }: TitleProps) {
       type="text"
       value={title}
       onChange={handleChange}
-      className="title-input text-4xl font-bold text-black mb-8 pt-2 border-bottom w-full max-w-4xl focus:outline-none"
+      className="title-input text-4xl font-bold text-text mb-8 pt-2 border-bottom w-full max-w-4xl focus:outline-none"
       placeholder="New page"
     />
   );

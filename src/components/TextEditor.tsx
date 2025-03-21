@@ -136,7 +136,7 @@ const ProseMirrorEditor: React.FC = () => {
       {editorView && <FloatingFormatMenu editorView={editorView} />} {/* Only render if editorView exists */}
       <div
         ref={editorRef}
-        className="text-black w-full max-w-4xl leading-[20px] h-[20px]"
+        className="text-text w-full max-w-4xl leading-[20px] h-[20px]"
       ></div>
     </div>
   );

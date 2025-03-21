@@ -17,7 +17,7 @@ function NoteEditor() {
         <SideBar />
         <div className="flex flex-col flex-grow">
           <TopBar />
-          <div className=" pt-2 flex-grow h-full bg-gray-200"> {/* Explicit height for debugging */}
+          <div className=" pt-2 flex-grow h-full bg-bg text-text"> {/* Explicit height for debugging */}
             <TextEditor
             ></TextEditor>
           </div>

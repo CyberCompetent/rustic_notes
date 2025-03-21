@@ -60,7 +60,7 @@ const TopBar: React.FC = () => {
   };
 
   return (
-    <div className="h-16 bg-gray-700 text-white flex items-center px-5 gap-4">
+    <div className="h-16 bg-1 text-white flex items-center px-5 gap-4">
       <Logo mode="bright" />
       <div className="join">
         <SelectModeButton isActive={activeMode === 'select'} onClick={() => handleModeClick('select')} />
@@ -95,7 +95,7 @@ const TopBar: React.FC = () => {
                 max="50"
                 value={brushSize}
                 onChange={(e) => handleInputChange(setBrushSize, 1, 50)(e.target.value)}
-                className="w-10 p-1 bg-gray-600 rounded text-white text-center appearance-none outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                className="w-10 p-1 bg-2 rounded text-white text-center appearance-none outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               />
               <span className="text-sm">px</span>
             </div>
@@ -118,7 +118,7 @@ const TopBar: React.FC = () => {
                 max="100"
                 value={opacity}
                 onChange={(e) => handleInputChange(setOpacity, 0, 100)(e.target.value)}
-                className="w-10 p-1 bg-gray-600 rounded text-white text-center appearance-none outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                className="w-10 p-1 bg-2 rounded text-white text-center appearance-none outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               />
               <span className="text-sm">%</span>
             </div>

@@ -1,19 +1,121 @@
-@import "tailwindcss";
-@plugin "daisyui";
+@import "tailwindcss"; /* Import tailwind classes */
+@plugin "daisyui"; /* Import daisy ui classes */
 
-@import 'material-icons/iconfont/material-icons.css';
-@import 'prosemirror-view/style/prosemirror.css';
+@theme { /* add custom tailwind for my themes*/
+  --color-1: var(--1-colour); /* primary-colour */
+  --color-1-1: var(--1-1-colour); /* primary-colour dark */
+  --color-1-2: var(--1-2-colour); /* secondary-colour darker */
 
-@layer utilities {
-  .bg-black {
-    background-color: transparent; /* Or any other colour you'd like */
-  }
+  --color-2: var(--2-colour); /* secondary-colour */
+  --color-bu: var(--bu-colour); /* button colour */
+  --color-bu-1: var(--bu-1-colour); /* button colour */
+
+
+  --color-text: var(--text-colour);
+  --color-bg: var(--bg-colour);
 }
 
-.hidden {
-  display: none !important;
-}
+@import 'material-icons/iconfont/material-icons.css'; /* import google icon font */
+@import 'prosemirror-view/style/prosemirror.css'; /* import styles for prosemirror */
+
 .ProseMirror {
   outline: none !important;
   box-shadow: none !important;
+}
+
+/* THEME COLOURS */
+/* Root variables for themes */
+:root {
+  
+  --1-ModernMidnight: #1d232a; 
+  --1-1-ModernMidnight: #181C21;
+  --1-2-ModernMidnight: #121519;
+  --2-ModernMidnight: oklch(0.13 0.028 261.692);  /* grey-950 */
+  --bu-ModernMidnight: oklch(0.13 0.028 261.692);  /* grey-950 */
+  --bu-1-ModernMidnight: oklch(0.21 0.034 264.665); /* grey-900 */
+
+
+
+  --1-colour_DeepIce: oklch(0.373 0.034 259.733);  /* grey-700 */
+  --1-1-colour_DeepIce: oklch(0.278 0.033 256.848); /* grey-800 */
+  --1-2-colour_DeepIce: oklch(0.21 0.034 264.665); /* grey-900 */
+  --2-colour_DeepIce: oklch(0.446 0.03 256.802);   /* grey-600 */
+  --bu-colour_DeepIce: oklch(0.623 0.214 259.815); /* blue-500 */
+  --bu-1-colour_DeepIce: oklch(0.546 0.245 262.881);   /* blue-600 */
+
+  --1-colour_RusticWoods: oklch(0.374 0.01 67.558); /* stone-700 */
+  --1-1-colour_RusticWoods: oklch(0.268 0.007 34.298); /* stone-800 */
+  --1-2-colour_RusticWoods: oklch(0.216 0.006 56.043); /* stone-900 */
+  --2-colour_RusticWoods: oklch(0.508 0.118 165.612); /* Emerald-700 */
+  --bu-1-colour_RusticWoods: oklch(0.432 0.095 166.913);   /* Emerald-800 */
+
+
+  --1-colour_GoldenSahara: oklch(0.443 0.11 240.79); /* sky-800 */
+  --1-1-colour_GoldenSahara: oklch(0.391 0.09 240.876); /* sky-900 */
+  --1-2-colour_GoldenSahara: oklch(0.293 0.066 243.157); /* sky-950 */
+  --2-colour_GoldenSahara: #b39700;
+  --bu-1-colour_GoldenSahara: #8f7900;
+
+  --text-colour_Light: black;
+  --bg-colour_Light: var(--color-gray-200);
+
+  --text-colour_Dark: #e0e0e0;
+  --bg-colour_Dark: #1e1e1e;
+}
+
+/* ModernMidnight Theme */
+[data-theme="modernmidnight"] {
+  --1-colour: var(--1-ModernMidnight);
+  --1-1-colour: var(--1-1-ModernMidnight); /* Assuming you want to apply similar structure */
+  --1-2-colour: var(--1-2-ModernMidnight); /* Add similar colours here if necessary */
+  --2-colour: var(--2-ModernMidnight);
+  --bu-colour: var(--bu-ModernMidnight);
+  --bu-1-colour: var(--bu-1-ModernMidnight);
+}
+
+/* DeepIce Theme */
+[data-theme="deepice"] {
+  --1-colour: var(--1-colour_DeepIce);
+  --1-1-colour: var(--1-1-colour_DeepIce); /* Added grey-800 */
+  --1-2-colour: var(--1-2-colour_DeepIce); /* Added grey-900 */
+  --2-colour: var(--2-colour_DeepIce);
+  --bu-colour: var(--bu-colour_DeepIce);
+  --bu-1-colour: var(--bu-1-colour_DeepIce);
+}
+
+/* RusticWoods Theme */
+[data-theme="rusticwoods"] {
+  --1-colour: var(--1-colour_RusticWoods);
+  --1-1-colour: var(--1-1-colour_RusticWoods); /* Assuming you want to apply similar structure */
+  --1-2-colour: var(--1-2-colour_RusticWoods); /* Add similar colours here if necessary */
+  --2-colour: var(--2-colour_RusticWoods);
+  --bu-colour: var(--2-colour_RusticWoods);
+  --bu-1-colour: var(--bu-1-colour_RusticWoods);
+}
+
+/* GoldenSahara Theme */
+[data-theme="goldensahara"] {
+  --1-colour: var(--1-colour_GoldenSahara);
+  --1-1-colour: var(--1-1-colour_GoldenSahara); /* Assuming you want to apply similar structure */
+  --1-2-colour: var(--1-2-colour_GoldenSahara); /* Add similar colours here if necessary */
+  --2-colour: var(--2-colour_GoldenSahara);
+  --bu-colour: var(--2-colour_GoldenSahara);
+  --bu-1-colour: var(--bu-1-colour_GoldenSahara);
+}
+
+/* Dark Mode */
+[data-mode="dark"] {
+  --text-colour: var(--text-colour_Dark);
+  --bg-colour: var(--bg-colour_Dark);
+}
+
+/* Light Mode */
+[data-mode="light"] {
+  --text-colour: var(--text-colour_Light);
+  --bg-colour: var(--bg-colour_Light);
+}
+
+/*MISC Styles*/
+.hidden {
+  display: none !important;
 }
