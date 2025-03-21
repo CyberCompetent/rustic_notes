@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, ReactNode } from 'react';
-import SmallButton from './SmallButton';
+import SmallButton from './Button';
 
 interface DropdownProps {
   id?: string;

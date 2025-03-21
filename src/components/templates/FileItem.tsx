@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SmallButton from "./SmallButton"; // Adjust the import path if necessary
+import SmallButton from "./Button"; // Adjust the import path if necessary
 
 interface FileItemProps {
   file: {

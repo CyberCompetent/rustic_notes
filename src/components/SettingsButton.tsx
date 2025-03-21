@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SmallButton from './templates/SmallButton';
+import SmallButton from './templates/Button';
 import SettingsItem from './SettingsMenu/SettingsItem';
 import { useWorkspaces } from './WorkspaceContext'; // Import the hook
 import Modal from './SettingsMenu/AddWorkspaceModal'; // Import the new Modal component

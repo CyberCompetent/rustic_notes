@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import SmallButton from './templates/SmallButton';
+import SmallButton from './templates/Button';
 
 const ProfileButton: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
