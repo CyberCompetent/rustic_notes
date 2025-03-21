@@ -1,5 +1,5 @@
 import React from 'react';
-import SmallButton from '../templates/SmallButton'
+import SmallButton from '../templates/Button'
 
 interface ButtonProps {
   isActive: boolean;

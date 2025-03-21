@@ -5,7 +5,7 @@ import SelectModeButton from './TopBar/SelectModeButton';
 import TextModeButton from './TopBar/TextModeButton';
 import DrawModeButton from './TopBar/DrawModeButton';
 import Logo from './Logo';
-import SmallButton from './templates/SmallButton';
+import SmallButton from './templates/Button';
 
 const TopBar: React.FC = () => {
   const [activeMode, setActiveMode] = useState<'select' | 'text' | 'draw' | null>(null);
