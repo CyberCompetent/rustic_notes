@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SmallButton from "./Button"; // Adjust the import path if necessary
+import Button from "@/components/templates/Button"; // Adjust the import path if necessary
 
 interface FileItemProps {
   file: {
@@ -23,19 +23,18 @@ const FileItem: React.FC<FileItemProps> = ({ file, onToggleExpand, isExpanded = 
       onMouseLeave={() => setIsHovered(false)}
       className="relative"
     >
-      <SmallButton
+      <Button
         id={`file-${file.name}`}
         svg={isHovered ? arrowIcon : fileIcon}
         onClick={onToggleExpand} // Correctly call the parent function
         isActive={isExpanded}
-        hover
-        buttons={isHovered ? "plus option" : undefined}
+        buttons={isHovered ? ["add", "more_vert"] : []} // Correctly pass icons based on hover state
         className="w-full text-left p-2 flex items-center justify-between"
       >
         <span className="ml-2 flex-grow truncate" title={file.name}>
           {file.name}
         </span>
-      </SmallButton>
+      </Button>
     </div>
   );
 };

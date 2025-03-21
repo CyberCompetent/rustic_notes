@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import SmallButton from './templates/Button';
+import Button from './templates/Button'; // Updated import to use the renamed Button component
 
 const ProfileButton: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
@@ -39,17 +39,16 @@ const ProfileButton: React.FC = () => {
 
   return (
     <div className="relative w-full" ref={buttonRef}> {/* Attach ref to parent div */}
-      <SmallButton
+      <Button
         id="select-mode-button"
         svg="brightness_1"
         onClick={handleClick}
         isActive={isActive}
-        buttons="arrow"
-        hover={true}
-        className='w-full'
+        buttons={["keyboard_arrow_down"]} // Pass an array of icons here
+        className="w-full"
       >
         Username
-      </SmallButton>
+      </Button>
 
       {/* Dropdown Menu */}
       {isActive && (

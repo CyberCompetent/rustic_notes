@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, ReactNode } from 'react';
-import SmallButton from './Button';
+import Button from './Button';
 
 interface DropdownProps {
   id?: string;
@@ -9,7 +9,7 @@ interface DropdownProps {
   svg?: string;
   onSelect: (option: string) => void;
   children?: ReactNode;
-  buttons?: "plus" | "option" | "arrow" | "plus option" | "option plus";
+  buttons?: string[]; // Updated to accept an array of icon names
   className?: string;
 }
 
@@ -20,7 +20,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   selectedOption,
   svg = "",
   children,
-  buttons,
+  buttons = [], // Default is an empty array
   className,
   onSelect,
 }) => {
@@ -57,21 +57,20 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <div className="relative w-full" ref={buttonRef}>
-      <SmallButton
+      <Button
         id={id}
         svg={svg}
         onClick={handleClick}
         isActive={isActive}
-        hover={true}
+        buttons={buttons} // Pass buttons as an array of strings (icons)
         className={`w-full ${className}`}
-        buttons={buttons}
       >
         {internalSelected}
         {children}
-      </SmallButton>
+      </Button>
 
       {isActive && (
-        <div className="absolute left-0  w-full bg-gray-800 text-white shadow-lg rounded-lg z-50">
+        <div className="absolute left-0 w-full bg-gray-800 text-white shadow-lg rounded-lg z-50">
           {options.map((option, index) => (
             <button
               key={index}
