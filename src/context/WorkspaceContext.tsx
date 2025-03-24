@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-import { Workspace } from './types'; // Adjust the path based on your file structure
+import { Workspace } from '@/types/types'; // Adjust the path based on your file structure
 
 
 interface WorkspaceContextType {
