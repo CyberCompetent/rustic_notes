@@ -106,36 +106,14 @@ export default function FloatingFormatMenu({ editorView }: FloatingFormatMenuPro
 
   </ul>
 </div>
+<ToggleComponent text="format_bold" applyMark={applyMark} mark="strong" />
+<ToggleComponent text="format_italic" applyMark={applyMark} mark="em" />
+<ToggleComponent text="format_underlined" applyMark={applyMark} mark="underline" />
+<ToggleComponent text="strikethrough_s" applyMark={applyMark} mark="strike" />
+<ToggleComponent text="code" applyMark={applyMark} mark="code" />
+<ToggleComponent text="functions" applyMark={applyMark} mark="math" />
+<ToggleComponent text="add_link" applyMark={applyMark} mark="link" />
 
-
-        <ToggleComponent
-          text="format_bold"
-          applyMark={(mark) => applyMark("strong")}
-        />
-        <ToggleComponent
-          text="format_italic"
-          applyMark={(mark) => applyMark("em")}
-        />
-        <ToggleComponent
-          text="format_underlined"
-          applyMark={(mark) => applyMark("underline")}
-        />
-        <ToggleComponent
-          text="strikethrough_s"
-          applyMark={(mark) => applyMark("strike")}
-        />
-        <ToggleComponent
-          text="code"
-          applyMark={(mark) => applyMark("code")}
-        />
-        <ToggleComponent
-          text="functions"
-          applyMark={(mark) => applyMark("math")}
-        />
-        <ToggleComponent
-          text="add_link"
-          applyMark={(mark) => applyMark("link")}
-        />
 </div>
   );
 }
