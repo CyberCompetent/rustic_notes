@@ -1,5 +1,5 @@
 import React from 'react';
-import SmallButton from '../templates/Button';
+import SmallButton from '@/components/templates/Button';
 
 interface SettingsItemProps {
   id: string;

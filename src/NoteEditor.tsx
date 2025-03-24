@@ -3,7 +3,7 @@
 //import { invoke } from "@tauri-apps/api/core";
 //import "./App.css";
 
-import { WorkspaceProvider } from './components/WorkspaceContext'; // Adjust the import path as needed
+import { WorkspaceProvider } from '@/context/WorkspaceContext'; // Adjust the import path as needed
 
 import TopBar from './components/TopBar';
 import SideBar from './components/SideBar';
