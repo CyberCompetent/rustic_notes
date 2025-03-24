@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Dropdown from '../templates/Dropdown';
+import Dropdown from '../templates/Dropdown-select';
 
 const SortButton: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState('Manual'); // Track the selected option
