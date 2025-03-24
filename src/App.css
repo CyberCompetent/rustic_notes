@@ -64,7 +64,7 @@
 }
 
 /* ModernMidnight Theme */
-[data-theme="modernmidnight"] {
+[data-theme="Modern Midnight"] {
   --1-colour: var(--1-ModernMidnight);
   --1-1-colour: var(--1-1-ModernMidnight); /* Assuming you want to apply similar structure */
   --1-2-colour: var(--1-2-ModernMidnight); /* Add similar colours here if necessary */
@@ -74,7 +74,7 @@
 }
 
 /* DeepIce Theme */
-[data-theme="deepice"] {
+[data-theme="Deep Ice"] {
   --1-colour: var(--1-colour_DeepIce);
   --1-1-colour: var(--1-1-colour_DeepIce); /* Added grey-800 */
   --1-2-colour: var(--1-2-colour_DeepIce); /* Added grey-900 */
@@ -84,7 +84,7 @@
 }
 
 /* RusticWoods Theme */
-[data-theme="rusticwoods"] {
+[data-theme="Rustic Woods"] {
   --1-colour: var(--1-colour_RusticWoods);
   --1-1-colour: var(--1-1-colour_RusticWoods); /* Assuming you want to apply similar structure */
   --1-2-colour: var(--1-2-colour_RusticWoods); /* Add similar colours here if necessary */
@@ -94,7 +94,7 @@
 }
 
 /* GoldenSahara Theme */
-[data-theme="goldensahara"] {
+[data-theme="Golden Sahara"] {
   --1-colour: var(--1-colour_GoldenSahara);
   --1-1-colour: var(--1-1-colour_GoldenSahara); /* Assuming you want to apply similar structure */
   --1-2-colour: var(--1-2-colour_GoldenSahara); /* Add similar colours here if necessary */
@@ -104,13 +104,13 @@
 }
 
 /* Dark Mode */
-[data-mode="dark"] {
+[data-mode="Dark"] {
   --text-colour: var(--text-colour_Dark);
   --bg-colour: var(--bg-colour_Dark);
 }
 
 /* Light Mode */
-[data-mode="light"] {
+[data-mode="Light"] {
   --text-colour: var(--text-colour_Light);
   --bg-colour: var(--bg-colour_Light);
 }
