@@ -14,12 +14,14 @@ import TextEditor from './components/TextEditor';
 
 function NoteEditor() {
 
-  //load theme in localstorage/activate default theme when NoteEditor loads
+  //load theme/mode in localstorage/activate default theme when NoteEditor loads
   useEffect(() => {
     const rootElement = document.documentElement;
-    const savedTheme = localStorage.getItem('selectedTheme') || 'Modern Midnight'; // Default to 'Modern Midnight'
+    const savedTheme = localStorage.getItem('selectedTheme') || 'Deep Ice'; // Default to 'Deep Ice'
+    const savedMode = localStorage.getItem('selectedMode') || 'Dark';
     
     rootElement.setAttribute('data-theme', savedTheme);
+    rootElement.setAttribute('data-mode', savedMode);
   }, []);
 
   return (
