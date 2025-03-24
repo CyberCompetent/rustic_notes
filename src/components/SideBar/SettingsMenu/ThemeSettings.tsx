@@ -8,22 +8,40 @@ const ThemeSettings: React.FC<ThemeSettingsProps> = ({ selectedTheme }) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false); // State to track dark mode
 
   useEffect(() => {
-    // Update the data-theme and data-mode attributes when selectedTheme or dark mode changes
-    const rootElement = document.documentElement;
+    const rootElement = document.documentElement; // Move declaration to the top
+  
+    const savedTheme = localStorage.getItem('selectedTheme');
+    const savedMode = localStorage.getItem('darkMode');
+  
+    if (savedTheme) {
+      rootElement.setAttribute('data-theme', savedTheme);
+    }
+  
+    if (savedMode) {
+      setIsDarkMode(savedMode === 'dark');
+    }
+  
     rootElement.setAttribute('data-theme', selectedTheme.toLowerCase().replace(' ', ''));
     rootElement.setAttribute('data-mode', isDarkMode ? 'dark' : 'light');
-
-    // Log the current data-theme and data-mode to the console
-    console.log('Current data-theme:', rootElement.getAttribute('data-theme'));
-    console.log('Current data-mode:', rootElement.getAttribute('data-mode'));
+  
     const primaryColor = getComputedStyle(rootElement).getPropertyValue('--primary-colour');
     console.log('Current --primary-colour value:', primaryColor);
-
-  }, [selectedTheme, isDarkMode]); // Effect runs when selectedTheme or isDarkMode changes
+  }, [selectedTheme, isDarkMode]);
+  
 
   const toggleDarkMode = () => {
-    setIsDarkMode(prevMode => !prevMode); // Toggle between dark and light mode
+    setIsDarkMode(prevMode => {
+      const newMode = !prevMode;
+      // Save the new dark mode preference to localStorage
+      localStorage.setItem('darkMode', newMode ? 'dark' : 'light');
+      return newMode;
+    });
   };
+
+  // Save the theme in localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('selectedTheme', selectedTheme.toLowerCase().replace(' ', ''));
+  }, [selectedTheme]);
 
   // Determine the selected mode as a string for display
   const selectedMode = isDarkMode ? 'Dark' : 'Light';
