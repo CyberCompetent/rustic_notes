@@ -4,14 +4,13 @@ import { useWorkspaces } from '@/context/WorkspaceContext'; // Import the hook
 import Modal from './SettingsMenu/AddWorkspaceModal'; // Import the new Modal component
 import ThemeSettings from './SettingsMenu/ThemeSettings';
 import { Workspace } from '@/types/types'; // Adjust the path based on your file structure
+import { useSettings } from '@/context/SettingsContext'; // Adjust the path based on your file structure
 
-interface SettingsMenuProps {
-    closeMenu: () => void;
-    InitialSection: string;
-  }
-
-  const SettingsMenu: React.FC<SettingsMenuProps> = ({ closeMenu, InitialSection }) => {
-    const [activeSection, setActiveSection] = React.useState(InitialSection);
+const SettingsMenu: React.FC = () => {
+    const { isOpen, initialSection, closeSettings } = useSettings();
+    if (!isOpen) return null;
+  
+    const [activeSection, setActiveSection] = React.useState(initialSection); // Use the selectedSection from context
     const [activeOption, setActiveOption] = React.useState<string | null>(null);
     const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -209,7 +208,7 @@ interface SettingsMenuProps {
                     id={name}
                     svg={svg} // Pass the SVG to the section
                     onClick={() => {
-                      setActiveSection(name);
+                    setActiveSection(name as "Account" | "Workspaces" | "Theme"); // Type assertion
                       setActiveOption(null); // Reset active option when changing sections
                     }}
                     isActive={activeSection === name} // Set active state for the section
@@ -310,7 +309,7 @@ interface SettingsMenuProps {
             {/* Close Button */}
             <button
               className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-              onClick={closeMenu}
+              onClick={closeSettings}
             >
               X
             </button>

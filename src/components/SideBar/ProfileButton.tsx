@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Button from '../templates/Button'; // Updated import to use the renamed Button component
+import Button from '../templates/Button';
+import { useSettings } from '@/context/SettingsContext'; // Adjust the path based on your file structure
 
 const ProfileButton: React.FC = () => {
+  const { openSettings } = useSettings();
+
+
   const [isActive, setIsActive] = useState(false);
-  const options = ['Logout', 'Manage Workspaces']; // Dropdown options
-  const dropdownRef = useRef<HTMLDivElement | null>(null); // Create a ref for the dropdown
-  const buttonRef = useRef<HTMLDivElement | null>(null); // Create a ref for the parent div
+  const options = ['Logout', 'Manage Workspaces'];
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -14,37 +18,40 @@ const ProfileButton: React.FC = () => {
 
   const handleSelect = (option: string) => {
     setIsActive(false); // Close dropdown after selection
-    console.log(`Selected option: ${option}`);
+    switch (option) {
+      case "Logout":
+        console.log("Logging out...");
+        break;
+      case "Manage Workspaces":
+        openSettings("Workspaces");
+        break;
+      default:
+        break;
+    }
   };
 
-  // Close dropdown if clicked outside the top div
+  // Close dropdown if clicked outside
   const handleClickOutside = (event: MouseEvent) => {
-    if (
-      buttonRef.current && 
-      !buttonRef.current.contains(event.target as Node) // Check if click is outside the parent div
-    ) {
+    if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
       setIsActive(false);
     }
   };
 
   useEffect(() => {
-    // Add event listener
     document.addEventListener('mousedown', handleClickOutside);
-
-    // Cleanup event listener on component unmount
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
   return (
-    <div className="relative w-full" ref={buttonRef}> {/* Attach ref to parent div */}
+    <div className="relative w-full" ref={buttonRef}>
       <Button
         id="select-mode-button"
         svg="brightness_1"
         onClick={handleClick}
         isActive={isActive}
-        buttons={["keyboard_arrow_down"]} // Pass an array of icons here
+        buttons={["keyboard_arrow_down"]}
         className="w-full"
       >
         Username
@@ -53,7 +60,7 @@ const ProfileButton: React.FC = () => {
       {/* Dropdown Menu */}
       {isActive && (
         <div
-          ref={dropdownRef} // Attach ref to dropdown menu
+          ref={dropdownRef}
           className="absolute left-0 mt-0 w-full bg-gray-800 text-white shadow-lg rounded-lg z-50"
         >
           {options.map((option, index) => (
