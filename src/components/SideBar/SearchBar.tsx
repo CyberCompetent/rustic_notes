@@ -1,5 +1,5 @@
 import React from 'react';
-import SmallInput from './templates/SmallInput'; // Import the SmallButton component
+import SmallInput from '../templates/SmallInput'; // Import the SmallButton component
 
 const exportee: React.FC = () => {
   return (

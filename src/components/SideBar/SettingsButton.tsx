@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import SmallButton from './templates/Button';
+import SmallButton from '@/components/templates/Button';
 import SettingsItem from './SettingsMenu/SettingsItem';
-import { useWorkspaces } from './WorkspaceContext'; // Import the hook
+import { useWorkspaces } from '@/context/WorkspaceContext'; // Import the hook
 import Modal from './SettingsMenu/AddWorkspaceModal'; // Import the new Modal component
 import ThemeSettings from './SettingsMenu/ThemeSettings';
 
 // Import the Workspace type
-import { Workspace } from './types'; // Adjust the path based on your file structure
+import { Workspace } from '@/types/types'; // Adjust the path based on your file structure
 
 const SettingsButton: React.FC = () => {
   const [isActive, setIsActive] = useState(false);

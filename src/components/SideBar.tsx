@@ -1,9 +1,9 @@
 import React from 'react';
-import ProfileButton from './ProfileButton';
-import SortButton from './SortButton';
-import SearchBar from './SearchBar';
-import SettingsButton from './SettingsButton';
-import FileTree from './FileTree';
+import ProfileButton from './SideBar/ProfileButton';
+import SortButton from './SideBar/SortButton';
+import SearchBar from './SideBar/SearchBar';
+import SettingsButton from './SideBar/SettingsButton';
+import FileTree from './SideBar/FileTree';
 
 const SideBar: React.FC = () => {
   return (

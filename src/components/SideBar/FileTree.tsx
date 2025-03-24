@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import FileItem from "./templates/FileItem"; // Import the new component
-import { useWorkspaces } from './WorkspaceContext'; // Import the hook
+import FileItem from "../templates/FileItem"; // Import the new component
+import { useWorkspaces } from '@/context/WorkspaceContext'; // Import the hook
 
 type File = {
   name: string;

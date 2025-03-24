@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Button from './templates/Button'; // Updated import to use the renamed Button component
+import Button from '../templates/Button'; // Updated import to use the renamed Button component
 
 const ProfileButton: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
