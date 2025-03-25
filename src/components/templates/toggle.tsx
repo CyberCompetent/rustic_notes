@@ -16,8 +16,7 @@ const ToggleComponent = ({ text, applyMark, mark }: ToggleComponentProps) => {
 
   return (
     <button
-    className={`text-gray-600 hover:bg-black hover:text-white material-icons rounded-md ${toggled ? 'bg-black' : ''} transition-all box-border inline-flex items-center justify-center w-9 h-9`}
-      onClick={(e) => {
+    className={`text-gray-600 hover:bg-gray-300 hover:text-black material-icons rounded-md ${toggled ? 'border-[2px] border-black' : ''} transition-all box-border inline-flex items-center justify-center w-9 h-9`}      onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
         toggleHandler(); // Toggle and apply the mark
