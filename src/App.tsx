@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NoteEditor from './NoteEditor';
-import Login from './Login.tsx';
+import Login from './StartUpMenu.tsx';
 
 function App() {
     return ( // Add return statement here
