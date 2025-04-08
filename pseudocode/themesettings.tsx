@@ -1,38 +1,40 @@
-// @ts-nocheck
+// Load saved theme and mode settings from the backend storage
+savedTheme ← rustStorage.getItem("selectedTheme")  // Make a request to the Rust backend for the saved theme
+savedMode ← rustStorage.getItem("darkMode")        // Make a request to the Rust backend for the saved mode
 
-//ThemeSettings.tsx
-const savedTheme = rustStorage.getItem('selectedTheme'); //make a request to the rust backend to send the item stored in the database
-const savedMode = rustStorage.getItem('darkMode');
-const defaultTheme = "DeepIce"
-const defaultMode = "Dark"
+// Define default theme and mode values
+defaultTheme ← "DeepIce"
+defaultMode ← "Dark"
 
-function setSelectedTheme(theme) { //declaring the function to change the theme in the css varibles
-    rootElement.setAttribute('data-theme', theme);
-}
-function setSelectedMode(mode) { //declaring the function to change the mode in the css varibles 
-    rootElement.setAttribute('data-mode', mode);
-}
+// PROCEDURE to apply the selected theme to the page using CSS variables
+PROCEDURE SetSelectedTheme(theme)
+    CALL rootElement.setAttribute("data-theme", theme)
+ENDPROCEDURE
 
+// PROCEDURE to apply the selected mode to the page using CSS variables
+PROCEDURE SetSelectedMode(mode)
+    CALL rootElement.setAttribute("data-mode", mode)
+ENDPROCEDURE
 
-if (savedTheme) { //checks if savedTheme is null (making sure there was a theme stored in the database)
-    setSelectedTheme(savedTheme); //if there was a valid saved theme set it to that
-  } else {
-    setSelectedMode(defaultTheme); //else set it to the default
-  }
+// Apply the saved theme if it exists, otherwise use the default theme
+IF savedTheme ≠ NULL THEN
+    CALL SetSelectedTheme(savedTheme)       // Set the saved theme from storage
+ELSE
+    CALL SetSelectedMode(defaultTheme)      // Fall back to the default theme
+ENDIF
 
-  if (savedMode) {
-    setSelectedMode(savedMode); //if there was a valid saved mode set it to that
-  } else {
-    setSelectedMode(defaultMode); //else set it to the default
-  }
+// Apply the saved mode if it exists, otherwise use the default mode
+IF savedMode ≠ NULL THEN
+    CALL SetSelectedMode(savedMode)         // Set the saved mode from storage
+ELSE
+    CALL SetSelectedMode(defaultMode)       // Fall back to the default mode
+ENDIF
 
-  return { //render as ui
-    <ThemeChanger />
-    <ModeSwitch />
-  }
+// RENDER the UI elements for theme and mode switching
+RENDER ThemeChanger()
+RENDER ModeSwitch()
 
-  //ModeSwitch.tsx
-  
-  function handleClick() {
-      openSettings("Account");  // Open settings with "Account" section selected
-  }
+// PROCEDURE to handle clicking the mode switch
+PROCEDURE HandleClick
+    CALL OpenSettings("Account")            // Open the settings menu with the "Account" tab active
+ENDPROCEDURE

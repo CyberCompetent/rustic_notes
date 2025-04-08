@@ -1,51 +1,48 @@
-// @ts-nocheck
-// Login.ts
-// Core variables
-loginData = { username: '', password: '' };
-errorMessage = '';
+// Core login variables
+loginData ← { username: "", password: "" }
+errorMessage ← ""
 
-// Form handling
-function handleInputChange(field, value) {
-  loginData[field] = value;
-}
+// PROCEDURE to handle input field changes
+PROCEDURE HandleInputChange(field, value)
+    loginData[field] ← value
+ENDPROCEDURE
 
-// Login process
-async function handleLoginSubmit() {
-  try {
-    response = sendToServer('/api/login', loginData);
+// PROCEDURE to submit login form
+PROCEDURE HandleLoginSubmit
+    TRY
+        response ← SendToServer("/api/login", loginData)    // Send login data to server
+        
+        IF response.success = FALSE THEN
+            errorMessage ← "Incorrect username or password"
+            RETURN
+        ENDIF
+
+        // Sync user data locally
+        CALL SaveToLocalStorage("userSettings", response.settings)
+        CALL SaveToLocalStorage("userNotes", response.notes)
+
+        // Redirect to the note editor
+        CALL NavigateTo("/NoteEditor")
     
-    if (!response.success) {
-      errorMessage = 'Incorrect username or password';
-      return;
+    CATCH error
+        errorMessage ← "Server connection error. Please try again."
+    ENDTRY
+ENDPROCEDURE
+
+// FUNCTION for backend login request
+FUNCTION HandleLoginRequest(data) RETURNS RECORD
+    user ← FindUserByUsername(data.username)
+    
+    IF user = NULL OR NOT VerifyPassword(data.password, user.password) THEN
+        RETURN { success: FALSE }
+    ENDIF
+
+    settings ← GetUserSettings(user.id)
+    notes ← GetUserNotes(user.id)
+
+    RETURN {
+        success: TRUE,
+        settings: settings,
+        notes: notes
     }
-    
-    // Sync user data
-    saveToLocalStorage('userSettings', response.settings);
-    saveToLocalStorage('userNotes', response.notes);
-    
-    // Navigate to editor
-    navigateTo('/NoteEditor');
-    
-  } catch (error) {
-    errorMessage = 'Server connection error. Please try again.';
-  }
-}
-
-// Login backend logic
-function handleLoginRequest(data) {
-  user = findUserByUsername(data.username);
-  
-  if (!user || !verifyPassword(data.password, user.password)) {
-    return { success: false };
-  }
-  
-  // Get user data
-  settings = getUserSettings(user.id);
-  notes = getUserNotes(user.id);
-  
-  return { 
-    success: true, 
-    settings: settings,
-    notes: notes
-  };
-}
+ENDFUNCTION

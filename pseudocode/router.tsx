@@ -1,37 +1,51 @@
-// @ts-nocheck
-/* eslint-disable */
+// App component
+// Import the required components
+IMPORT NoteEditor
+IMPORT Login
 
-//App.tsx
-import NoteEditor from 'NoteEditor.tsx'; //import the required components
-import Login from 'Login.tsx'; 
+// Main function for the app
+FUNCTION App:
+    // Define routes for navigation
+    CREATE routes:
+        // Route for Login page
+        CREATE route path "/" that displays Login component
+        // Route for NoteEditor page
+        CREATE route path "/NoteEditor" that displays NoteEditor component
 
-function App() {
-    return ( // Assign the components to corrosponding route paths
-        <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/NoteEditor" element={<NoteEditor/>} />
-        </Routes>
-    );
-}
+    // Return the routes configuration
+    RETURN routes
 
-export default App;
+// End of App component
 
-//Login.tsx
-if Login() == success {
-    navigate("/NoteEditor"); // navigate to and render the page assigned to route "/NoteEditor"
-}
-else {
-    handleLoginFail() //run funciton to handle the user failing to login
-}
+// Login component
+// Function to check if login is successful
+IF Login() == success:
+    // Navigate to the NoteEditor page
+    NAVIGATE to "/NoteEditor"
+ELSE:
+    // Handle login failure
+    CALL handleLoginFail()
 
-//NoteEditor.tsx
-import LogoutButton from 'LogoutButton.tsx' //import the LogoutButton
-return { //render the logoutButton and other components inside the NoteEditor
-    //other components
-    <LogoutButton />
-}
+// End of Login component
 
-//LogoutButton.tsx
-function handleClick() {
-    navigate("/"); // navigate to and render the page assigned to route "/"
-}
+// NoteEditor component
+// Import the LogoutButton component
+IMPORT LogoutButton
+
+// Function to render the components in NoteEditor
+FUNCTION NoteEditor:
+    // Render other components and the LogoutButton
+    RETURN {
+        // Other components of the NoteEditor
+        DISPLAY LogoutButton
+    }
+
+// End of NoteEditor component
+
+// LogoutButton component
+// Function to handle logout button click
+FUNCTION handleClick:
+    // Navigate to the Login page (home)
+    NAVIGATE to "/"
+
+// End of LogoutButton component
