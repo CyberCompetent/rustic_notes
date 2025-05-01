@@ -1,6 +1,6 @@
 use rusqlite::{params, Connection, Result};
 use chrono::Utc;
-use crate::fetch_data; // Assuming fetch_and_display_data is in `database.rs`
+use crate::fetch_data;
 
 #[tauri::command]
 pub fn create_workspace(workspace_name: String) -> Result<String, String> {

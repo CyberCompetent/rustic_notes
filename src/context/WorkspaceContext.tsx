@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { Workspace } from '@/types/types'; // Adjust the path based on your file structure
-
+import { Workspace } from '@/types/types';
 
 interface WorkspaceContextType {
   workspaces: Workspace[];
@@ -9,42 +8,47 @@ interface WorkspaceContextType {
   deleteWorkspace: (name: string) => void;
 }
 
-// Create the context
 const WorkspaceContext = createContext<WorkspaceContextType | undefined>(undefined);
 
-// Define props for the WorkspaceProvider
 interface WorkspaceProviderProps {
-  children: ReactNode; // Specify that children can be any ReactNode
+  children: ReactNode;
 }
 
-// Create a provider component
 export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }) => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
 
-  // Load workspaces from local storage on mount
+  // Fetch from backend on mount
   useEffect(() => {
-    const storedWorkspaces = localStorage.getItem('workspaces');
-    if (storedWorkspaces) {
-      setWorkspaces(JSON.parse(storedWorkspaces));
-    }
+    const fetchWorkspaces = async () => {
+      try {
+        const fetched: Workspace[] = await invoke('get_workspaces');
+        setWorkspaces(fetched);
+      } catch (error) {
+        console.error('Failed to load workspaces from backend:', error);
+      }
+    };
+
+    fetchWorkspaces();
   }, []);
 
   const addWorkspace = async (workspace: Workspace) => {
     try {
-      // Send request to backend to create workspace
-      const response = await invoke<string>('create_workspace', { workspaceName: workspace.name });
-      console.log(response);  // Log success message from the backend
+      await invoke<string>('create_workspace', { workspaceName: workspace.name });
+      // Update state after successful creation
+      setWorkspaces(prev => [...prev, workspace]);
     } catch (error) {
       console.error('Error creating workspace:', error);
     }
   };
 
-  const deleteWorkspace = (name: string) => {
-    setWorkspaces((prevWorkspaces) => {
-      const newWorkspaces = prevWorkspaces.filter(ws => ws.name !== name);
-      localStorage.setItem('workspaces', JSON.stringify(newWorkspaces));
-      return newWorkspaces;
-    });
+  const deleteWorkspace = async (name: string) => {
+    try {
+      await invoke<string>('delete_workspace', { workspaceName: name });
+      // Update state after deletion
+      setWorkspaces(prev => prev.filter(ws => ws.name !== name));
+    } catch (error) {
+      console.error('Error deleting workspace:', error);
+    }
   };
 
   return (
@@ -54,7 +58,6 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }
   );
 };
 
-// Custom hook for using the context
 export const useWorkspaces = () => {
   const context = useContext(WorkspaceContext);
   if (!context) {

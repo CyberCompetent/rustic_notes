@@ -12,11 +12,15 @@ fn main() {
         Ok(_) => {
             println!("Database initialised successfully.");
 
-            // Start the Tauri app with the new `create_workspace` command
+            // Start the Tauri app with the commands
             Builder::default()
-            .invoke_handler(tauri::generate_handler![commands::create_workspace::create_workspace])
-                .run(tauri::generate_context!())
-                .expect("error while running tauri application");
+            .invoke_handler(tauri::generate_handler![
+                commands::create_workspace::create_workspace,
+                commands::delete_workspace::delete_workspace,
+                commands::get_workspaces::get_workspaces
+            ])
+            .run(tauri::generate_context!())
+            .expect("error while running tauri application");
 
         }
 

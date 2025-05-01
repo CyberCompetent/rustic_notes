@@ -26,33 +26,10 @@ const FileTree: React.FC = () => {
       }));
       setFileTreeData(mappedWorkspaces);
     } else {
-      // If no workspaces found, set initial data and save to Local Storage
+      // If no workspaces found, set initial data
       const initialFileTreeData: File[] = [
-        {
-          name: "Private Workspace",
-          type: "workspace",
-          children: [
-            { name: "Example Note Page", type: "note", children: [] },
-          ],
-        },
-        {
-          name: "School Workspace",
-          type: "workspace",
-          children: [
-            { name: "Example Note Page", type: "note", children: [] },
-          ],
-        },
-        {
-          name: "Friends Workspace",
-          type: "workspace",
-          children: [
-            { name: "Example Note Page", type: "note", children: [] },
-          ],
-        },
       ];
       setFileTreeData(initialFileTreeData);
-      // Save initial data to Local Storage
-      localStorage.setItem('workspaces', JSON.stringify(initialFileTreeData));
     }
   }, [workspaces]); // Update when workspaces change
   
