@@ -1,31 +1,23 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // DO NOT REMOVE
 
+mod commands;   // Imports fetch_data.rs to retrieve and display data
 mod database;     // Imports database.rs so the database can be initialised
-mod insert_data;  // Imports insert_data.rs to insert test records
-mod fetch_data;   // Imports fetch_data.rs to retrieve and display data
+mod fetch_data;
 
-use rustic_notes_lib;
+use tauri::Builder; // Import the Builder for the Tauri app
 
 fn main() {
     // Initialise the database connection
     match database::init_db() {
-        Ok(conn) => {
+        Ok(_) => {
             println!("Database initialised successfully.");
 
-            // Insert test data
-            match insert_data::insert_test_data(&conn) {
-                Ok(_) => println!("Test data inserted successfully."),
-                Err(e) => eprintln!("Failed to insert test data: {}", e),
-            }
+            // Start the Tauri app with the new `create_workspace` command
+            Builder::default()
+            .invoke_handler(tauri::generate_handler![commands::create_workspace::create_workspace])
+                .run(tauri::generate_context!())
+                .expect("error while running tauri application");
 
-            // Fetch and print data to the terminal
-            match fetch_data::fetch_and_display_data() {
-                Ok(_) => println!("Fetched data displayed above."),
-                Err(e) => eprintln!("Failed to fetch data: {}", e),
-            }
-
-            // Proceed with running the app
-            rustic_notes_lib::run();
         }
 
         Err(e) => {

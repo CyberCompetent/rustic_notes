@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-
+import { invoke } from '@tauri-apps/api/core';
 import { Workspace } from '@/types/types'; // Adjust the path based on your file structure
 
 
@@ -29,12 +29,15 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }
     }
   }, []);
 
-  const addWorkspace = (workspace: Workspace) => { // Change parameter type to Workspace
-    const newWorkspaces = [...workspaces, workspace];
-    setWorkspaces(newWorkspaces);
-    localStorage.setItem('workspaces', JSON.stringify(newWorkspaces));
+  const addWorkspace = async (workspace: Workspace) => {
+    try {
+      // Send request to backend to create workspace
+      const response = await invoke<string>('create_workspace', { workspaceName: workspace.name });
+      console.log(response);  // Log success message from the backend
+    } catch (error) {
+      console.error('Error creating workspace:', error);
+    }
   };
-
 
   const deleteWorkspace = (name: string) => {
     setWorkspaces((prevWorkspaces) => {
